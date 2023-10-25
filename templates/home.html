@@ -1,0 +1,299 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %} 
+
+{% block body%}
+    <header>
+      <div class="carousel" data-count="3" data-current="2">
+        <!-- <button class="btn btn-control"></button> -->
+
+        <div class="items">
+          <div class="item" data-marker="1">
+            <img src="{% static 'img/carousel/Image1.jpg' %}" alt="Background" class="background"/>
+
+            <div class="content">
+              <div class="outside-content">
+                <div class="inside-content">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-12 align-center">
+                        <h1>New amazing suppliments</h1>
+                        <p>Provide lightweight and powerull</p>
+                        <a href="{% url 'products:products_list' %}">More Suppliments ></a>
+                        <br><br>
+                      </div>
+                      <div class="col-sm-6 col-sm-offset-3 align-center">
+                        <img src="{% static 'img/carousel/Image2.jpg' %}" alt=""/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item active" data-marker="2">
+            <img src="{% static 'img/carousel/Image1.jpg' %}" alt="Background" class="background"/>
+
+            <div class="content">
+              <div class="outside-content">
+                <div class="inside-content">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-8 col-sm-offset-2 align-center">
+                        <img src="{% static 'img/carousel/image3.jpg' %}" alt="Surface Pro"/>
+                      </div>
+                      <div class="col-sm-12 align-center">
+                        <h1>Best suppliments For Everyone</h1>
+                        <p>Get Suppliments at an Affordable Price.</p>
+                        <a href="{% url 'products:products_list' %}">View surfaces ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item" data-marker="3">
+            <img src="{% static 'static/img/carousel/image3.jpg' %}" alt="" class="background"/>
+
+            <div class="content">
+              <div class="outside-content">
+                <div class="inside-content">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-sm-5 col-sm-offset-1 align-center">
+                        <img src="{% static 'img/carousel/image4.jpg' %}" alt="iPad Air 2" class="hidden-xs hidden-sm"/>
+                        <img src="{% static 'img/carousel/image5.jpg' %}" alt="iPad Air 2" class="hidden-md hidden-lg"/>
+                      </div>
+                      <div class="col-sm-4 align-left">
+                        <br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm">
+                        <br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm"><br class="hidden-xs hidden-sm">
+                        <h1>Balanced Wellness, Better You</h1>
+                        <br>
+                        
+                        <p>
+                          Elevate your journey to balanced wellness and discover a better you with our premium supplements. Your path to a healthier, happier life starts here.".
+                        </p>
+                        <a href="{% url 'faq' %}">View article ></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <ul class="markers">
+          <li data-marker="1"><img src="{% static 'img/carousel/imge7.jpg' %}" alt="Background"/></li>
+          <li data-marker="2" class="active"><img src="{% static 'img/carousel/Image1.jpg' %}" alt="Background"/></li>
+          <li data-marker="3"><img src="{% static 'img/carousel/image3.jpg' %}" alt="Background"/></li>
+        </ul>
+      </div>
+    </header>
+    <br><br>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 align-center">
+          <a href="./blog/">
+            <img src="{% static 'img/carousel/image4.jpg' %}" alt="Blog" class="image"/>
+          </a>
+          <br><br>
+
+          <a href="#">Blog headlines</a>
+        </div>
+        <div class="col-sm-3 align-center">
+          <a href="#video" data-gallery="#video" data-source="vimeo" data-id="110691368" data-id="110691368" data-title="Apple iPad Air" data-description="So capable, you won’t want to put it down. So thin and light, you won’t have to.">
+            <img src="{% static 'img/carousel/image4.jpg' %}" alt="New devices" class="image"/>
+          </a>
+          <br><br>
+
+          <a href="#video" data-gallery="#video" data-source="vimeo" data-id="110691368" data-title="Apple iPad Air" data-description="So capable, you won’t want to put it down. So thin and light, you won’t have to.">For Men</a>
+        </div>
+        <div class="col-sm-3 align-center">
+          <a href="#video" data-gallery="#video" data-source="youtube" data-id="6g-ZIm0wge4" data-title="Best New Dell Laptops" data-description="Best of dell's laptops that you can consider buying in 2016. 4 Laptops are featured in the video and all of them has equal importance and there is no order that #1 is better than #2">
+            <img src="{% static 'img/carousel/image4.jpg' %}" alt="Del XPS" class="image"/>
+          </a>
+          <br><br>
+
+          <a href="#video" data-gallery="#video" data-source="youtube" data-id="6g-ZIm0wge4" data-title="Best New Dell Laptops" data-description="Best of dell's laptops that you can consider buying in 2016. 4 Laptops are featured in the video and all of them has equal importance and there is no order that #1 is better than #2">For Women </a>
+        </div>
+        <div class="col-sm-3 align-center">
+          <a href="#">
+            <img src="{% static 'img/carousel/image4.jpg' %}" alt="Gallery" class="image"/>
+          </a>
+          <br><br>
+          
+          <a href="{% url 'products:products_list' %}">Products gallery</a>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+    
+    <hr class="offset-lg">
+    <hr class="offset-lg">
+
+    <div class="container">
+      <h2>NEW PRODUCTS</h2>
+      <hr class="offset-md">
+
+      <div class="row products">
+        {% for obj in object_list|slice:":3"  %}
+        <div class="col-sm-6 col-md-4 product">
+          <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+          <a href='products/products/{{ obj.get_absolute_url }}'> <img src="{{ obj.image.url }}" alt="{{ obj.slug }}"/></a>
+
+          <div class="content">
+            <h1 class="h4">{{ obj.title }}</h1>
+            <p class="price">${{obj.price}}</p>
+            <label>{{obj.category}}</label>
+
+
+            <form action="{% url 'cart:cart_add' product_id=obj.id %}" method="post">
+              {% csrf_token %}
+              {{ cart_product_form }}
+              <a href="products/products/{{ obj.get_absolute_url }}" class="btn btn-link"> Details</a>
+              <input class="btn btn-primary btn-rounded btn-sm" type="submit" value="Add to Cart">
+            </form>
+            
+          </div>
+        </div>
+        {% endfor %}
+
+        <div class="col-sm-6 col-md-4 product hidden-md hidden-lg">
+          <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+          <a href="./"><img src="{% static 'img/carousel/image6.jpg' %}" alt="Mi Pad 2/"></a>
+
+          <div class="content">
+            <h1 class="h4">Amazing Nutrition</h1>
+            {% comment %} <p class="sale">$199.99</p> {% endcomment %}
+            <p class="price through">$24.99</p>
+
+            <a href="../catalog/product.html" class="btn btn-link"> Details</a>
+            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h2>RECOMMENDATION FOR YOU</h2>
+      <hr class="offset-md">
+
+      <div class="row products">
+        <div class="col-sm-6 col-md-3 product">
+          <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+          <a href="./"><img src="{% static 'img/carousel/Image1.jpg' %}" alt="HP Chromebook 11"/></a>
+
+          <div class="content">
+            <h1 class="h4">Amazing Nutrition</h1>
+            <p class="price">$19.99</p>
+
+            <a href="../catalog/product.html" class="btn btn-link"> Details</a>
+            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 product">
+          <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+          <a href="./"><img src="{% static 'img/carousel/Image1.jpg' %}" alt="HP Chromebook 14"/></a>
+
+          <div class="content">
+            <h1 class="h4">Amazing Nutrition</h1>
+            <p class="sale">$20.99</p>
+            {% comment %} <p class="price through">$24.99</p> {% endcomment %}
+
+            <a href="../catalog/product.html" class="btn btn-link"> Details</a>
+            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 product">
+          <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+          <a href="./"><img src="{% static 'img/carousel/Image1.jpg' %}" alt="HP Chromebook 14"/></a>
+
+          <div class="content">
+            <h1 class="h4">Amazing Nutrition</h1>
+            <p class="price">$29.99</p>
+
+            <a href="../catalog/product.html" class="btn btn-link"> Details</a>
+            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-3 product">
+          <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+          <a href="./"><img src="{% static 'img/carousel/Image1.jpg' %}" alt="HP Chromebook 14"/></a>
+
+          <div class="content">
+            <h1 class="h4">Amazing Nutrition</h1>
+            <p class="sale">$20.99</p>
+            {% comment %} <p class="price through">$249.99</p> {% endcomment %}
+
+            <a href="../catalog/product.html" class="btn btn-link"> Details</a>
+            <button class="btn btn-primary btn-rounded btn-sm"> <i class="ion-bag"></i> Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <h2>NEW ARTICLES</h2>
+      <hr class="offset-md">
+
+      <div class="row blog">
+        <div class="col-sm-6 col-md-6 item">
+
+          <div class="body">
+            <a href="#" class="view"><i class="ion-ios-book-outline"></i></a>
+
+            <a href="#">
+              <img src="{% static 'img/carousel/image6.jpg' %}" title="Apple Devices" alt="Apple Devices">
+            </a>
+
+            <div class="caption">
+              <h1 class="h3">Your Ultimate Supplement Guide</h1>
+              <label> 07.10.2013</label>
+              <hr class="offset-sm">
+
+              <p>
+                Welcome to 'Your Ultimate Supplement Guide' – your trusted source for expert insights on supplements. Explore our curated content to make informed choices, empowering your journey to enhanced well-being and vitality.
+              </p>
+              <hr class="offset-sm">
+
+              <a href="{% url 'faq' %}"> View article <i class="ion-ios-arrow-right"></i> </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-md-6 item">
+          <div class="body">
+            <a href="#" class="view"><i class="ion-ios-book-outline"></i></a>
+            <a href="#">
+              <img src="{% static 'img/carousel/image4.jpg' %}" title="Coffee" alt="Coffee">
+            </a>
+
+            <div class="caption">
+              <h1 class="h3">Unlocking the Secrets to Optimal Health: Your Go-To Supplement Blog </h1>
+              <label> 27.09.2023</label>
+              <hr class="offset-sm">
+
+              <p>
+                Dive into a world of health and vitality with our supplement blog. Discover expert insights, latest trends, and personalized advice, guiding you towards optimal well-being. Your trusted companion on the journey to a healthier, happier you..
+              </p>
+              <hr class="offset-sm">
+
+              <a href="#"> View article <i class="ion-ios-arrow-right"></i> </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr class="offset-lg">
+    <hr class="offset-lg">
+
+
+{% endblock body%}

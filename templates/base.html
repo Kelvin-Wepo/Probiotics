@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> Probiotics &middot; {% block title %}{% endblock title%}</title>
+
+    <meta name="description" content="Bootstrap template for you store - E-Commerce Bootstrap">
+    <meta name="keywords" content=" e-commerce, premium e-commerce">
+    <meta name="author" content="Ceasar Agbekuadzi">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
+    <!-- Bootstrap -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'css/carousel.css' %}" rel="stylesheet">
+    <link href="{% static 'css/carousel-recommendation.css' %}" rel="stylesheet">
+    <link href="{% static 'ionicons-2.0.1/css/ionicons.css' %}" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Catamaran:400,100,300' rel='stylesheet' type='text/css'>
+
+
+  </head>
+  <body>
+    <div class="cart" data-toggle="inactive">
+      <div class="label">
+        {% with total_items=cart|length %}
+        {% if total_items > 0 %}
+          <p>
+            <i class="ion-bag"></i>{{ total_items }}
+          </p> 
+        {% else %}
+        <p>
+          <i class="ion-bag"></i>0
+        </p>
+        {% endif %}
+      {% endwith %}
+      </div>
+
+      <div class="overlay"></div>
+
+      <div class="window">
+        <div class="title">
+          <button type="button" class="close"><i class="ion-android-close"></i></button>
+          <h1 class="h3 info">Shopping cart</h1>
+        </div>
+
+        <div class="content">
+          {% for item in cart %}
+            {% with product=item.product%}
+          <div class="media">
+            <div class="media-left">
+              <a href="{{ product.get_absolute_url }}">
+                <img class="media-object" src="{{ product.image.url }}" alt="{{ product.slug }}"/>
+              </a>
+            </div>
+
+            <div class="media-body">
+              <h2 class="h4 media-heading">{{ product.title }}</h2>
+              <label>{{ product.category }}</label>
+              <p class="price">${{ item.price }}</p>
+            </div>
+            <div class="controls">
+              <div class="input-group">
+                <form action="{% url 'cart:cart_add' product.id %}" method="post">
+                  {% csrf_token %}
+                  {{ item.update_quantity_form.quantity }}
+                  {{ item.update_quantity_form.override }}
+                  <button class="btn btn-default btn-sm"><i class="ion-ios-cart"></i> Update</button>
+                </form>
+              <form action="{% url 'cart:cart_remove' product.id %}" method="post">
+                <button class="btn btn-default btn-sm"><i class="ion-trash-b"></i> Remove</button>
+                {% csrf_token %}
+              </form>
+            </div><!-- /input-group -->
+            </div>
+          </div>
+        {% endwith %}
+        {% endfor %}
+      </div> 
+        <div class="checkout container-fluid">
+          <div class="row">
+            <div class="col-xs-3 col-sm-2">
+              <div>
+                {% with total_items=cart|length %}
+                  {% if total_items > 0 %}
+                  <p>Subtotal:
+                  </p> 
+                <h3 class="h4">Total:</h3>
+              </div>
+            </div>
+            <div class="col-xs-3 col-sm-4">
+              <div class="total">
+                <p>{{ total_items }} item{{ total_items|pluralize }}</p>
+                  {% else %}
+                  <p>Your Cart is Empty</p>
+                  {% endif %}
+                {% endwith %}
+                <h3 class="h4">${{ cart.get_total_price }}</h3>
+              </div>
+            </div>
+            
+            <div class="col-xs-6 col-sm-6">
+              <a class="btn btn-primary" href="{% url 'orders:order_create' %}"><i class="ion-android-checkbox-outline"></i>&nbsp;&nbsp; Checkout order </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'home' %}"> <i class="ion-cube"></i>Probiotics</a>
+          </div>
+
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li {% if request.get_full_path == '/' %} class="active" {% endif %} ><a href="{% url 'home' %}">Home</a></li>
+              <li {% if request.get_full_path == '/products/products/' %} class="active" {% endif %}  ><a href="{% url 'products:products_list' %}">Catalog</a></li>
+              <li><a href="#">Blog</a></li>
+              <li {% if 'gallery' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'products:products_gallery' %}">Gallery</a></li>
+              <li class="dropdown">
+                <a href="./catalog/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">More <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li {% if 'products' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'products:products_list' %}">Product</a></li>
+                  <li {% if 'cart' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'cart:cart_detail' %}">Cart</a></li>
+                  <li {% if 'create' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'orders:order_create' %}">Checkout</a></li>
+                  <li {% if 'faq' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'faq' %}">FAQ</a></li>
+                  <li {% if 'contact' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'contact' %}">Contacts</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Variations</li>
+                  <li {% if request.get_full_path == '/' %} class="active" {% endif %} ><a href="{% url 'home' %}">Home</a></li>
+                </ul>
+              </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {% if user.is_authenticated %}
+              <li {% if 'cart' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'cart:cart_detail' %}"> <i class="icon ion-ios-cart"></i> Cart </a></li>
+              <li><a href="{% url 'cart:cart_detail' %}"> <i class="icon ion-heart"></i> WishList </a></li>
+              <li><a href="{% url 'users:logout' %}"> <i class="icon ion-log-out"></i> LogOut </a></li>
+              {% else %}
+              <li {% if 'login' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'users:login' %}"> <i class="ion-android-person"></i> Login </a></li>
+              <li {% if 'sign_up' in request.get_full_path %} class="active" {% endif %} ><a href="{% url 'users:sign_up' %}"><i class="ion-man"></i> Sign Up</a></li> 
+              {% endif %}
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </nav>
+
+{% block body%}
+{% endblock body%}
+
+    <footer>
+      <div class="about">
+        <div class="container">
+          <div class="row">
+            <hr class="offset-md">
+
+            <div class="col-xs-6 col-sm-3">
+              <div class="item">
+                <i class="ion-ios-telephone-outline"></i>
+                <h1>24/7 free <br> <span>support</span></h1>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+              <div class="item">
+                <i class="ion-ios-star-outline"></i>
+                <h1>Low price <br> <span>guarantee</span></h1>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-3">
+            </div>
+            <div class="col-xs-6 col-sm-3">
+            </div>
+
+            <hr class="offset-md">
+          </div>
+        </div>
+      </div>
+
+      <div class="subscribe">
+        <div class="container align-center">
+            <hr class="offset-md">
+
+            <h1 class="h3 upp">Join our newsletter</h1>
+            <p>Get more information and receive special discounts for our products.</p>
+            <hr class="offset-sm">
+
+            <form action="index.php" method="post">
+              <div class="input-group">
+                <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-primary"> Subscribe <i class="ion-android-send"></i> </button>
+                </span>
+              </div><!-- /input-group -->
+            </form>
+            <hr class="offset-lg">
+            <hr class="offset-md">
+
+            <div class="social">
+              <a href="#"><i class="ion-social-facebook"></i></a>
+              <a href="#"><i class="ion-social-twitter"></i></a>
+              <a href="#"><i class="ion-social-instagram-outline"></i></a>
+              <a href="#"><i class="ion-social-linkedin-outline"></i></a>
+              <a href="#"><i class="ion-social-youtube-outline"></i></a>
+            </div>
+
+
+            <hr class="offset-md">
+            <hr class="offset-md">
+        </div>
+      </div>
+
+
+      <div class="container">
+        <hr class="offset-md">
+
+        <div class="row menu">
+          <div class="col-sm-3 col-md-2">
+            <h1 class="h4">Information <i class="ion-plus-round hidden-sm hidden-md hidden-lg"></i> </h1>
+
+            <div class="list-group">
+              <a href="#" class="list-group-item">About</a>
+              <a href="#" class="list-group-item">Terms</a>
+              <a href="#" class="list-group-item">How to order</a>
+              <a href="#" class="list-group-item">Delivery</a>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-2">
+            <h1 class="h4">Products <i class="ion-plus-round hidden-sm hidden-md hidden-lg"></i> </h1>
+
+            <div class="list-group">
+              <a href="#" class="list-group-item">For Men</a>
+              <a href="#" class="list-group-item">For Women</a>
+              <a href="#" class="list-group-item">For Children</a>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-2">
+            <h1 class="h4">Support <i class="ion-plus-round hidden-sm hidden-md hidden-lg"></i> </h1>
+
+            <div class="list-group">
+              <a href="#" class="list-group-item">Returns</a>
+              <a href="{% url 'faq' %}" class="list-group-item">FAQ</a>
+              <a href="{% url 'contact' %}" class="list-group-item">Contacts</a>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-2">
+            <h1 class="h4">Location</h1>
+
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Language
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                <li><a href="#English"> <img src="{% static 'img/flags/gb.png' %}" alt="Eng"/> English</a></li>
+                <li><a href="#Spanish"> <img src="{% static 'img/flags/es.png' %}" alt="Spa"/> Spanish</a></li>
+                <li><a href="#Deutch"> <img src="{% static 'img/flags/de.png' %}" alt="De"/> Deutch</a></li>
+                <li><a href="#French"> <img src="{% static 'img/flags/fr.png' %}" alt="Fr"/> French</a></li>
+              </ul>
+            </div>
+            <hr class="offset-xs">
+
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Currency
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li><a href="#Euro"><i class="ion-social-euro"></i> Euro</a></li>
+                <li><a href="#Dollar"><i class="ion-social-usd"></i> Dollar</a></li>
+                <li><a href="#Yen"><i class="ion-social-yen"></i> Yen</a></li>
+                <li><a href="#Bitcoin"><i class="ion-social-bitcoin"></i> Bitcoin</a></li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="col-sm-3 col-md-3 col-md-offset-1 align-right hidden-sm hidden-xs">
+            <h1 class="h4">Probiotics, Inc.</h1>
+
+              <address>
+                Tom mboya street<br>
+                Nairobi Kenya<br>
+                <abbr title="Phone">P:</abbr> (123) 456-7890
+              </address>
+
+              <address>
+                <strong>Support</strong><br>
+                <a href="mailto:#">sup@example.com</a>
+              </address>
+
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-9 payments">
+            <p>Pay your order in the most convenient way</p>
+
+            <div class="payment-icons">
+              <img src="{% static 'img/payments/paypal.svg' %}" alt="paypal">
+              <img src="{% static 'img/payments/visa.svg' %}" alt="visa">
+              <img src="{% static 'img/payments/master-card.svg' %}" alt="mc">
+              <img src="{% static 'img/payments/discover.svg' %}" alt="discover">
+              <img src="{% static 'img/payments/american-express.svg' %}" alt="ae">
+            </div>
+            <br>
+
+          </div>
+          <div class="col-sm-4 col-md-3 align-right align-center-xs">
+            <hr class="offset-sm hidden-sm">
+            <hr class="offset-sm">
+            <p>Probiotics© 2023 <br> Designed By <a href="" target="_blank">Kwepo</a></p>
+            <hr class="offset-lg visible-xs">
+          </div>
+        </div>
+      </div>
+    </footer>
+
+<!-- Modal -->
+    <div class="modal fade" id="Modal-SignIn" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-android-close"></i></span></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4 class="modal-title">Join Free</h4>
+                  <br>
+
+                  <form class="join" action="index.php" method="post">
+                    <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control" />
+                    <br>
+                    <input type="password" name="password" value="" placeholder="Password" required="" class="form-control" />
+                    <br>
+
+                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                    <a href="#">Terms ></a>
+
+                    <br><br>
+                    <p>
+                      By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made.
+                    </p>
+                  </form>
+                </div>
+                <div class="col-sm-6">
+                  <h4 class="modal-title">Sign In</h4>
+                  <br>
+
+                  <form class="signin" action="index.php" method="post">
+                    <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control" />
+                    <br>
+                    <input type="password" name="password" value="" placeholder="Password" required="" class="form-control" />
+                    <br>
+
+                    <button type="submit" class="btn btn-primary btn-sm">Sign In</button>
+                    <a href="#forgin-password" data-action="Forgot-Password">Password recovery ></a>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="Modal-ForgotPassword" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-android-close"></i></span></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm-6">
+                  <h4 class="modal-title">Forgot Your Password?</h4>
+                  <br>
+
+                  <form class="join" action="index.php" method="post">
+                    <input type="email" name="email" value="" placeholder="E-mail" required="" class="form-control" />
+                    <br>
+
+                    <button type="submit" class="btn btn-primary btn-sm">Continue</button>
+                    <a href="#Sign-In" data-action="Sign-In">Back ></a>
+                  </form>
+                </div>
+                <div class="col-sm-6">
+                  <br><br>
+                  <p>
+                    Enter the e-mail address associated with your account. Click submit to have your password e-mailed to you.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="Modal-Gallery" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ion-android-close"></i></span></button>
+            <h4 class="modal-title">Title</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/jquery-latest.min.js' %}"></script>
+    
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/core.js' %}"></script>
+    <script src="{% static 'js/catalog.js' %}"></script>
+
+    <script type="text/javascript" src="{% static 'js/carousel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/carousel-recommendation.js' %}"></script>
+
+    <script src="{% static 'js/checkout.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+
+    <script src="{% static 'js/jquery-ui-1.11.4.js' %}"></script>
+    <script src="{% static 'js/ui.touch-punch.js' %}"></script>
+{% block scripts %}
+{% endblock scripts %}
+  </body>
+</html>

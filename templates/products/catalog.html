@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Product Catalog{% endblock %} 
+
+{% block body%}
+
+
+    <hr class="offset-lg">
+
+    <div class="container tags">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="ion-arrow-down-b"></i> Sorting by name
+          </button>
+          <ul class="dropdown-menu">
+            <li class="active"><a href="#"> <i class="ion-arrow-down-c"></i> Name [A-Z]</a></li>
+            <li><a href="#"> <i class="ion-arrow-up-c"></i> Name [Z-A]</a></li>
+            <li><a href="#"> <i class="ion-arrow-down-c"></i> Price [Low-High]</a></li>
+            <li><a href="#"> <i class="ion-arrow-up-c"></i> Price [High-Low]</a></li>
+          </ul>
+        </div>
+
+        <p>Search by tags</p>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-default btn-xs active">
+            <input type="radio" name="options" id="option1" checked> All products
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option2"> Business
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option3"> Home
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option4"> Mobility
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option5"> Powerfull
+          </label>
+          <label class="btn btn-default btn-xs">
+            <input type="radio" name="options" id="option6"> Gaming
+          </label>
+        </div>
+    </div>
+
+{% endblock body%}
