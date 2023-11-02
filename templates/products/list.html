@@ -155,7 +155,7 @@
         <!-- /// -->
 
         <!-- Products -->
-        <div class="col-sm-9 products">
+        {% comment %} <div class="col-sm-9 products">
           <div class="row">
             {% for obj in object_list %}
             <div class="col-sm-6 col-md-4 product">
@@ -178,9 +178,29 @@
               </div>
             </div>
             {% endfor %}
-        
+         {% endcomment %}
+         {% for obj in object_list %}
+<div class="col-sm-6 col-md-4 product">
+    <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
+    <a href='{{ obj.get_absolute_url }}'> <img src="{{ obj.image.url }}" alt="{{ obj.slug }}"/></a>
+
+    <div class="content">
+        <h1 class="h4">{{ obj.title }}</h1>
+        <p class="price">${{ obj.price }}</p>
+        <label>{{ obj.category }}</label>
+
+        <form action="{% url 'cart:cart_add' obj.id %}" method="post">
+            {% csrf_token %}
+            {{ cart_product_form }}
+            <input class="btn btn-primary btn-rounded btn-sm" type="submit" value="Add to Cart">
+        </form>
+    </div>
+</div>
+{% endfor %}
+
            
             <!-- Included Pagination -->
+            
             <nav>            
                 <ul class="pagination">
                   <li>
