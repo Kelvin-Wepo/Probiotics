@@ -19,5 +19,5 @@ urlpatterns = [
     path('filter_by_price_ascend/<slug:price_ascend>/', views.product_list_view, name="products_list_by_price_ascend"),
     path('filter_by_price_descend/<slug:price_descend>/', views.product_list_view, name="products_list_by_price_descend"),
     path('products/<int:id>/<slug:slug>/', views.product_detail_view, name="product_list_detail"),
-#    path('<slug:slug>/', views.ProductDetailSlugView.as_view()),
+    path('<slug:slug>/', views.ProductDetailSlugView.as_view()),
 ]

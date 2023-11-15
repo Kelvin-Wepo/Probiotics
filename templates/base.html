@@ -10,7 +10,7 @@
 
     <meta name="description" content="Bootstrap template for you store - E-Commerce Bootstrap">
     <meta name="keywords" content=" e-commerce, premium e-commerce">
-    <meta name="author" content="Ceasar Agbekuadzi">
+    <meta name="author" content="Kelvin Wepo">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 
     <!-- Bootstrap -->
@@ -52,15 +52,23 @@
             {% with product=item.product%}
           <div class="media">
             <div class="media-left">
-              <a href="{{ product.get_absolute_url }}">
+              {% comment %} <a href="{{ product.get_absolute_url }}">
                <img class="media-object" src="{{product.image.url}}" alt="{{ product.slug }}"/> 
-              </a>
+              </a> {% endcomment %}
+              <a href="{{ product.get_absolute_url }}">
+                {% if product.image %}
+                    <img class="media-object" src="{{ product.image.url }}" alt="{{ product.slug }}"/> 
+                {% else %}
+                    {% comment %} <p>No Image Available</p> {% endcomment %}
+                {% endif %}
+            </a>
+            
             </div>
 
             <div class="media-body">
               <h2 class="h4 media-heading">{{ product.title }}</h2>
               <label>{{ product.category }}</label>
-              <p class="price">${{ item.price }}</p>
+              <p class="price">Ksh.{{ item.price }}</p>
             </div>
             <div class="controls">
               <div class="input-group">
@@ -98,7 +106,7 @@
                   <p>Your Cart is Empty</p>
                   {% endif %}
                 {% endwith %}
-                <h3 class="h4">${{ cart.get_total_price }}</h3>
+                <h3 class="h4">Ksh.{{ cart.get_total_price }}</h3>
               </div>
             </div>
             
@@ -239,9 +247,9 @@
             <h1 class="h4">Products <i class="ion-plus-round hidden-sm hidden-md hidden-lg"></i> </h1>
 
             <div class="list-group">
-              <a href="#" class="list-group-item">For Men</a>
-              <a href="#" class="list-group-item">For Women</a>
-              <a href="#" class="list-group-item">For Children</a>
+              <a href="#" class="list-group-item">Thin 30 Probiotics</a>
+              <a href="#" class="list-group-item">Thin 60 Probiotics</a>
+              <a href="#" class="list-group-item">Women Probiotic</a>
             </div>
           </div>
           <div class="col-sm-3 col-md-2">
@@ -278,7 +286,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <li><a href="#Euro"><i class="ion-social-euro"></i> Euro</a></li>
                 <li><a href="#Dollar"><i class="ion-social-usd"></i> Dollar</a></li>
-                <li><a href="#Yen"><i class="ion-social-yen"></i> Yen</a></li>
+                <li><a href="#Yen"><i class="ion-social-yen"></i> Ksh.</a></li>
                 <li><a href="#Bitcoin"><i class="ion-social-bitcoin"></i> Bitcoin</a></li>
               </ul>
             </div>
@@ -290,12 +298,12 @@
               <address>
                 Tom mboya street<br>
                 Nairobi Kenya<br>
-                <abbr title="Phone">P:</abbr> (123) 456-7890
+                <abbr title="Phone">P:</abbr> (254) 720693768
               </address>
 
               <address>
                 <strong>Support</strong><br>
-                <a href="mailto:#">sup@example.com</a>
+                <a href="mailto:#">cherotichd73@gmail.com.com</a>
               </address>
 
           </div>

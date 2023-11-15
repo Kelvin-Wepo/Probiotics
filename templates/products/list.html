@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+ {% extends 'base.html' %}
 {% load static %}
 
 {% block title %} List Item {% endblock %} 
@@ -143,9 +143,9 @@
                 &nbsp;&nbsp;&nbsp;<i class="ion-android-done"></i>
                 {% else %}
                 {% endif %}                
-                <div class="label" data-value="{{ manu }}">
+                {% comment %} <div class="label" data-value="{{ manu }}">
                   &nbsp;&nbsp; <a href="{% url 'products:product_list_by_manufacturer_filter' manu %}">{{ manu }}</a> 
-                </div>
+                </div> {% endcomment %}
               </div>
               {% endfor %}
 
@@ -182,11 +182,18 @@
          {% for obj in object_list %}
 <div class="col-sm-6 col-md-4 product">
     <a href="#favorites" class="favorites" data-favorite="inactive"><i class="ion-ios-heart-outline"></i></a>
-    <a href='{{ obj.get_absolute_url }}'> <img src="{{ obj.image.url }}" alt="{{ obj.slug }}"/></a>
-
+    {% comment %} <a href='{{ obj.get_absolute_url }}'> <img src="{{ obj.image.url }}" alt="{{ obj.slug }}"/></a> {% endcomment %}
+    <a href="{{ obj.get_absolute_url }}">
+      {% if obj.image %}
+          <img src="{{ obj.image.url }}" alt="{{ obj.slug }}" />
+      {% else %}
+          {% comment %} <p>No Image Available</p> {% endcomment %}
+      {% endif %}
+  </a>
+  
     <div class="content">
         <h1 class="h4">{{ obj.title }}</h1>
-        <p class="price">${{ obj.price }}</p>
+        <p class="price">Ksh.{{ obj.price }}</p>
         <label>{{ obj.category }}</label>
 
         <form action="{% url 'cart:cart_add' obj.id %}" method="post">
@@ -225,4 +232,4 @@
     </div>
     <br><br>
 
-{% endblock body%}
+{% endblock body%} 

@@ -513,10 +513,10 @@
                             <p>Delivery: </p>
                         </div>
                         <div class="col-xs-6">
-                            <p><b>${{ cart.get_total_price }}</b></p>
+                            <p><b>Ksh.{{ cart.get_total_price }}</b></p>
                             <p><b> {{ cart.coupon.discount}}% </b></p>
                         {% endif %}
-                            <p><b>$0</b></p>
+                            <p><b>Ksh.0</b></p>
                         </div>
                     </div>
                 </div>
@@ -529,7 +529,7 @@
                             <h3 class="no-margin">Total sum</h3>
                         </div>
                         <div class="col-xs-6">
-                            <h3 class="no-margin" id="amount" >${{ cart.get_total_price_after_discount|floatformat:2 }}</h3>
+                            <h3 class="no-margin" id="amount">Ksh.{{ cart.get_total_price_after_discount|floatformat:2 }}</h3>
                         </div>
                     </div>
                 </div>

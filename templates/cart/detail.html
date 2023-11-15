@@ -26,14 +26,20 @@
                             {% with product=item.product%}
                           <div class="media">
                             <div class="media-left">
-                              <a href="{{ product.get_absolute_url }}">
+                              {% comment %} <a href="{{ product.get_absolute_url }}">
                                 <img class="media-object" src="{{ product.image.url }}" alt="{{ product.slug }}"/>
-                              </a>
+                              </a> {% endcomment %}
+                              {% if product.image %}
+    <img class="media-object" src="{{ product.image.url }}" alt="{{ product.slug }}" />
+{% else %}
+    {% comment %} <p>No Image Available</p> {% endcomment %}
+{% endif %}
+
                             </div>
                             <div class="media-body">
                               <h2 class="h4 media-heading">{{ product.title }}</h2>
                               <label>{{ product.category }}</label>
-                              <p class="price">${{ item.price }}</p>
+                              <p class="price">Ksh.{{ item.price }}</p>
                             </div>
                             <div class="controls">
                               <div class="input-group">
@@ -81,7 +87,7 @@
                                 {% endwith %}
                             </div>
                             <div class="col-xs-6">
-                                <p><b> ${{ cart.get_total_price }}</b></p>
+                                <p><b> Ksh.{{ cart.get_total_price }}</b></p>
                             </div>
                         </div>
                     </div>
