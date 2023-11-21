@@ -12,16 +12,18 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import environ
+
+
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-gkc9d*lbpf22sgdv4#94be20qxrf0_2np4f$8ovqi+*m4nlq7("
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,12 +95,23 @@ WSGI_APPLICATION = "probiotics.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# env = environ.Env()
+# env.read_env()
+
+# raw_database_url = os.environ.get("DATABASE_URL")
+# decoded_database_url = raw_database_url.decode("utf-8")  # Assuming utf-8 encoding
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default":dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    # "default": dj_database_url.parse(decoded_database_url),
 }
+    
+
+
+#     DATABASES = {
+#                 "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
+        
 
 
 # Password validation
