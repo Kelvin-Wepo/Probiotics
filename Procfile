@@ -1,1 +1,2 @@
-web: gunicorn probiotics.cart.coupouns.orders.products.users.wsgi:application
+web: gunicorn probiotics.wsgi
+
