@@ -1,1 +1,2 @@
-web: gunicorn probiotics.wsgi:application
+web: gunicorn probiotics.wsgi
+
