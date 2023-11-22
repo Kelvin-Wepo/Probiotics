@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-gkc9d*lbpf22sgdv4#94be20qxrf0_2np4f$8ovqi+*m4nlq7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['shop-probiotics.onrender.com']
 
 
 # Application definition
