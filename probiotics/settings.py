@@ -107,9 +107,17 @@ db_from_env = dj_database_url.config(default=config('DATABASE_URL'))
 #     # "default": dj_database_url.parse(decoded_database_url),
 
 # }
+# DATABASES = {
+#     # 'default': config('DATABASE_URL', default='postgres://kwepo:Access@localhost:5432/kwepo'),
+#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+# }
+
 DATABASES = {
-    # 'default': config('DATABASE_URL', default='postgres://kwepo:Access@localhost:5432/kwepo'),
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True,
+    )
 }
 
 db_from_env = dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=600, ssl_require=True)
