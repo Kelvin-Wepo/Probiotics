@@ -25,8 +25,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-gkc9d*lbpf22sgdv4#94be20qxrf0_2np4f$8ovqi+*m4nlq7'
 
-
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -104,11 +102,20 @@ WSGI_APPLICATION = "probiotics.wsgi.application"
 # decoded_database_url = raw_database_url.decode("utf-8")  # Assuming utf-8 encoding
 db_from_env = dj_database_url.config(default=config('DATABASE_URL'))
 
-DATABASES = {
-    "default":dj_database_url.parse(os.environ.get("DATABASE_URL")),
-    # "default": dj_database_url.parse(decoded_database_url),
+# DATABASES = {
+#     "default":dj_database_url.parse(os.environ.get("DATABASE_URL")),
+#     # "default": dj_database_url.parse(decoded_database_url),
 
+# }
+DATABASES = {
+    'default': config('DATABASE_URL', default='postgres://kwepo:Access@localhost:5432/kwepo'),
 }
+
+db_from_env = dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=600, ssl_require=True)
+print("DATABASE_URL from environment:", os.environ.get("DATABASE_URL"))
+
+DATABASES['default'] = dj_database_url.config(default=config('DATABASE_URL'), conn_max_age=600, ssl_require=True)
+
     
 
 
