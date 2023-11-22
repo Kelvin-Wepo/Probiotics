@@ -78,10 +78,11 @@ If you have any questions, concerns, or require assistance, please don't hesitat
 - **Customer Support Email:** kelvinwepo7710@gmail.com
 - **Phone:** +254799489045
 
+
 ## 10. FAQs
 
 We have compiled a list of frequently asked questions on our website to assist you with any common inquiries.
 
-Thank you for choosing the Probiotics Shop as your trusted source for probiotic supplements. We look forward to serving your digestive health needs. Happy shopping!
+Thank you for choosing the Probiotics Shop as your trusted source for probiotic supplements. We look forward to serving your digestive health needs. Feel Free to Support this Project in Anyway you can. Happy shopping!
 
 *
